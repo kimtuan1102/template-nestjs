@@ -5,16 +5,23 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
+import {
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { FptIdAuthGuard } from '../../guards/auth.guard';
 import { JwtPayload } from './interfaces/jwt.payload';
 import { AuthUser } from '../../decorators/auth.user';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import { RefreshAccessTokenDto } from './dto/refresh.access.token.dto';
-import { UserLoginDto } from "./dto/user.login.dto";
+import { UserLoginDto } from './dto/user.login.dto';
+import { AuthorizationTokenRequest } from './interfaces/authorization.token.request';
 
 @Controller('auth')
 @ApiTags('Auth')
@@ -34,6 +41,20 @@ export class AuthController {
     return {
       accessToken: await this.authService.createAccessToken(user),
       refreshToken: await this.authService.createRefreshToken(user._id),
+    };
+  }
+  @Post('fpt-id/token')
+  @ApiOkResponse({})
+  async accessToken(@Body() requestToken: AuthorizationTokenRequest) {
+    const userInfo = await this.authService.getUserInfoFptId(requestToken);
+    const user = await this.userService.createOrUpdateUserByEmail(
+      userInfo.email,
+      userInfo,
+    );
+    return {
+      access_token: await this.authService.createAccessToken(user),
+      token_type: 'bearer',
+      refresh_token: await this.authService.createRefreshToken(user._id),
     };
   }
   @Post('login')

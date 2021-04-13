@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  HttpService,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -13,6 +14,8 @@ import { UtilsService } from '../../providers/utils.service';
 import { UserService } from '../user/user.service';
 import { RefreshAccessTokenDto } from './dto/refresh.access.token.dto';
 import { UserLoginDto } from './dto/user.login.dto';
+import { AuthorizationTokenRequest } from './interfaces/authorization.token.request';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +24,8 @@ export class AuthService {
     @InjectModel('RefreshToken')
     private readonly refreshTokenModel: Model<RefreshToken>,
     private readonly userService: UserService,
+    private http: HttpService,
+    private configService: ConfigService,
   ) {}
   createAccessToken(user: User): string {
     const jwtPayload = this.buildJwtPayload(user);
@@ -70,6 +75,29 @@ export class AuthService {
     }
     return user;
   }
+  async getUserInfoFptId(requestToken: AuthorizationTokenRequest) {
+    const body = Object.keys(requestToken)
+      .map(function (k) {
+        return (
+          encodeURIComponent(k) + '=' + encodeURIComponent(requestToken[k])
+        );
+      })
+      .join('&');
+    const tokenResponse = await this.http
+      .post(`${this.configService.get('FPT_ID_ENDPOINT')}/token`, body, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      })
+      .toPromise();
+    const { data } = await this.http
+      .get(
+        `${this.configService.get('FPT_ID_ENDPOINT')}/userinfo/?access_token=${
+          tokenResponse.data.access_token
+        }`,
+      )
+      .toPromise();
+    return data;
+  }
+
   // ***************************************************************************
   //                                 PRIVATE METHOD
   // ***************************************************************************
