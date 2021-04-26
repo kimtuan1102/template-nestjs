@@ -11,7 +11,7 @@ import { UserNotFoundException } from '../../exceptions/user.not.found.exception
 @Injectable()
 export class UserService {
   constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
-  async createUser(userDto: UserDto): Promise<UserEntity> {
+  async createUser(userDto: UserDto): Promise<User> {
     const user = new this.userModel(userDto);
     await this.isEmailUnique(user.email);
     await user.save();

@@ -15,5 +15,5 @@ export class UserDto {
   phone_number: string;
 
   @ApiPropertyOptional({ enum: RoleType })
-  roles: RoleType;
+  role: RoleType;
 }

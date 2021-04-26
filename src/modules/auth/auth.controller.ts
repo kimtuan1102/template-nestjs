@@ -5,8 +5,6 @@ import {
   HttpCode,
   HttpStatus,
   Post,
-  Req,
-  UseGuards,
 } from '@nestjs/common';
 import {
   ApiCreatedResponse,
@@ -14,7 +12,6 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { FptIdAuthGuard } from '../../guards/auth.guard';
 import { JwtPayload } from './interfaces/jwt.payload';
 import { AuthUser } from '../../decorators/auth.user';
 import { UserService } from '../user/user.service';
@@ -22,7 +19,7 @@ import { AuthService } from './auth.service';
 import { RefreshAccessTokenDto } from './dto/refresh.access.token.dto';
 import { UserLoginDto } from './dto/user.login.dto';
 import { AuthorizationTokenRequest } from './interfaces/authorization.token.request';
-import { FPTIDAuth } from "../../decorators/http.decorators";
+import { FPTIDAuth } from '../../decorators/http.decorators';
 
 @Controller('auth')
 @ApiTags('Auth')
