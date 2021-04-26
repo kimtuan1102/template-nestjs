@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserDto } from './dto/user.dto';
@@ -6,7 +6,7 @@ import { UserEntity } from './user.entity';
 import { User } from './user.interface';
 import { EmailAlreadyExistException } from '../../exceptions/email.already.exist.exception';
 import { UserUpdateDto } from './dto/user.update.dto';
-import { UserNotFoundException } from "../../exceptions/user.not.found.exception";
+import { UserNotFoundException } from '../../exceptions/user.not.found.exception';
 
 @Injectable()
 export class UserService {
@@ -21,15 +21,11 @@ export class UserService {
     email: string,
     userUpdateDto: UserUpdateDto,
   ): Promise<User> {
-    return await this.userModel.findOneAndUpdate(
-      { email: email },
-      userUpdateDto,
-      {
-        upsert: true,
-        setDefaultsOnInsert: true,
-        new: true,
-      },
-    );
+    return this.userModel.findOneAndUpdate({ email: email }, userUpdateDto, {
+      upsert: true,
+      setDefaultsOnInsert: true,
+      new: true,
+    });
   }
   async findUserById(userId: string): Promise<User> {
     const user = await this.userModel.findOne({

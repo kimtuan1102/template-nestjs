@@ -22,6 +22,7 @@ import { AuthService } from './auth.service';
 import { RefreshAccessTokenDto } from './dto/refresh.access.token.dto';
 import { UserLoginDto } from './dto/user.login.dto';
 import { AuthorizationTokenRequest } from './interfaces/authorization.token.request';
+import { FPTIDAuth } from "../../decorators/http.decorators";
 
 @Controller('auth')
 @ApiTags('Auth')
@@ -32,7 +33,7 @@ export class AuthController {
   ) {}
   //FPT ID Auth
   @Get('fpt-id/token')
-  @UseGuards(FptIdAuthGuard)
+  @FPTIDAuth()
   async getAccessToken(@AuthUser() jwtPayload: JwtPayload) {
     const user = await this.userService.createOrUpdateUserByEmail(
       jwtPayload.email,
