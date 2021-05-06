@@ -449,6 +449,19 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fpt-smart-cloud/nestjs-kafka@^1.0.0":
+  version "1.0.0"
+  resolved "https://npm.pkg.github.com/download/@fpt-smart-cloud/nestjs-kafka/1.0.0/5e17dc61d71db8ce33d5353bdb2e1ec65128220144ae517b4804021ff4b8a81d#2be451a503a8a320b29fd5f0fcd6a145f26424e7"
+  integrity sha512-95Qpo6ePqB9bul2p2hJBveP4kTkCgdyjV0a/gXFkPNwjn5T2CbvCsjn6NwmlVzcgmkn724J8HJ33cLtY+hg0xA==
+  dependencies:
+    "@kafkajs/confluent-schema-registry" "^2.0.1"
+    "@nestjs/common" "^7.6.5"
+    "@nestjs/core" "^7.4.4"
+    "@nestjs/microservices" "^7.4.4"
+    kafkajs "^1.15.0"
+    reflect-metadata "^0.1.13"
+    rxjs "^6.6.3"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -645,19 +658,6 @@
     avsc ">= 5.4.13 < 6"
     mappersmith ">= 2.30.1 < 3"
     protobufjs "^6.10.1"
-
-"@kimtuan1102/nestjs-kafka@^7.2.35":
-  version "7.2.35"
-  resolved "https://registry.yarnpkg.com/@kimtuan1102/nestjs-kafka/-/nestjs-kafka-7.2.35.tgz#6e27239a9a1540043fe9ec143405f890573d951c"
-  integrity sha512-U4QVbl1R+B1sZ2NISBnUYAeQpNhlKcufsT2tsqC4fczsrJillF5GXez6cvflpz8cbMMtes2hlcNJC0XNy7xYzQ==
-  dependencies:
-    "@kafkajs/confluent-schema-registry" "^2.0.1"
-    "@nestjs/common" "^7.6.5"
-    "@nestjs/core" "^7.4.4"
-    "@nestjs/microservices" "^7.4.4"
-    kafkajs "^1.15.0"
-    reflect-metadata "^0.1.13"
-    rxjs "^6.6.3"
 
 "@mapbox/node-pre-gyp@^1.0.0":
   version "1.0.1"

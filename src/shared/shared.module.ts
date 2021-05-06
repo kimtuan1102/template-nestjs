@@ -4,9 +4,10 @@ import { MongooseConfigService } from './config/mongo.config';
 import { JwtConfigService } from './config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
-import { KafkaModule } from "@kimtuan1102/nestjs-kafka";
-import { KafkaConfigService } from "./config/kafka.config";
-import { KAFKA_CONNECTION_NAME } from "../common/constants/kafka";
+import { KafkaModule } from '@fpt-smart-cloud/nestjs-kafka';
+import { KAFKA_CONNECTION_NAME } from '../common/constants/kafka';
+import { KafkaConfigService } from './config/kafka.config';
+
 @Global()
 @Module({
   imports: [
