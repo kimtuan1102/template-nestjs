@@ -1,10 +1,10 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { KAFKA_CONNECTION_NAME } from '../../common/constants/kafka';
 import {
   KafkaModuleOption,
   KafkaOptionsFactory,
-} from '@kimtuan1102/nestjs-kafka';
-import { ConfigService } from '@nestjs/config';
-import { KAFKA_CONNECTION_NAME } from "../../common/constants/kafka";
+} from '@fpt-smart-cloud/nestjs-kafka';
 
 @Injectable()
 export class KafkaConfigService implements KafkaOptionsFactory {
